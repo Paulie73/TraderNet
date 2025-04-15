@@ -1,11 +1,12 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.dagger.hilt)
+    kotlin("kapt") version "2.1.20"
 }
 
 android {
-    namespace = "com.example.main_screen"
+    namespace = "com.example.common"
     compileSdk = 35
 
     defaultConfig {
@@ -28,13 +29,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
-    api(project(":data:quotes"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -43,8 +40,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    debugImplementation(libs.androidx.ui.tooling)
+    api(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    api(libs.androidx.lifecycle.viewmodel.compose)
 }

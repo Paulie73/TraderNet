@@ -1,8 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    kotlin("kapt") version "2.1.20"
     alias(libs.plugins.compose.compiler)
+    kotlin("kapt") version "2.1.20"
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
@@ -46,7 +47,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":feature:main-screen"))
+    implementation(project(":feature:quotes"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -63,6 +64,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(libs.hilt.android)
+
+    api(libs.hilt.android)
     kapt(libs.hilt.compiler)
 }
