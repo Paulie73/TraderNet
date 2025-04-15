@@ -20,5 +20,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "TraderNet"
-include(":core")
- 
+include(":app")
+include(":core:network")
+include(":feature:main-screen")
+include(":data:quotes")
