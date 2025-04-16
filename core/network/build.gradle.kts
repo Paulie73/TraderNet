@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.dagger.hilt)
+    kotlin("kapt") version "2.1.20"
+    kotlin("plugin.serialization") version "2.0.0"
 }
 
 android {
@@ -37,6 +40,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    api(libs.hilt.android)
+    kapt(libs.hilt.compiler)
     api(libs.ktor.client.core)
     api(libs.ktor.client.cio)
+    api(libs.ktor.client.content.negotiation)
+    api(libs.ktor.serialization.kotlinx.json)
+    api(libs.ktor.client.websockets)
 }

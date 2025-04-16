@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.common.AppColors
 
 @Composable
 fun QuotesScreen(
@@ -96,7 +97,7 @@ fun QuoteItem(quoteData: QuoteData) {
                 .align(Alignment.TopStart),
             text = quoteData.name,
             fontSize = 18.sp,
-            color = Color(0xFF262b2f)
+            color = AppColors.contentOnColorPrimary
         )
 
         Text(
@@ -105,7 +106,7 @@ fun QuoteItem(quoteData: QuoteData) {
                 .align(Alignment.BottomStart),
             text = quoteData.description,
             fontSize = 10.sp,
-            color = Color(0xFF949398)
+            color = AppColors.contentOnColorTertiary
         )
 
         Text(
@@ -114,7 +115,7 @@ fun QuoteItem(quoteData: QuoteData) {
                 .align(Alignment.BottomEnd),
             text = quoteData.price,
             fontSize = 13.sp,
-            color = Color(0xFF262b2f)
+            color = AppColors.contentOnColorPrimary
         )
 
         Text(
@@ -123,8 +124,8 @@ fun QuoteItem(quoteData: QuoteData) {
                 .align(Alignment.TopEnd)
                 .background(
                     color = when (quoteData.deltaPercentageColoring) {
-                        DeltaPercentageColoring.GREEN_BACKGROUND -> Color.Green
-                        DeltaPercentageColoring.RED_BACKGROUND -> Color.Red
+                        DeltaPercentageColoring.GREEN_BACKGROUND -> AppColors.green
+                        DeltaPercentageColoring.RED_BACKGROUND -> AppColors.red
                         DeltaPercentageColoring.RED, DeltaPercentageColoring.GREEN -> Color.Unspecified
                     }, shape = RoundedCornerShape(6.dp)
                 )
@@ -133,15 +134,15 @@ fun QuoteItem(quoteData: QuoteData) {
             fontSize = 18.sp,
             color = when (quoteData.deltaPercentageColoring) {
                 DeltaPercentageColoring.GREEN_BACKGROUND, DeltaPercentageColoring.RED_BACKGROUND -> Color.White
-                DeltaPercentageColoring.RED -> Color.Red
-                DeltaPercentageColoring.GREEN -> Color.Green
+                DeltaPercentageColoring.RED -> AppColors.red
+                DeltaPercentageColoring.GREEN -> AppColors.green
             }
         )
 
         Icon(
             Icons.Rounded.KeyboardArrowRight, "",
             modifier = Modifier.align(Alignment.CenterEnd),
-            tint = Color(0xFF949398)
+            tint = AppColors.divider
         )
 
         Box(
@@ -149,7 +150,7 @@ fun QuoteItem(quoteData: QuoteData) {
                 .height(1.dp)
                 .padding(start = 24.dp)
                 .fillMaxWidth()
-                .background(color = Color(0xFFededef))
+                .background(color = AppColors.divider)
                 .align(Alignment.BottomCenter)
         )
     }

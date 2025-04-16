@@ -16,8 +16,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        val viewModel: QuotesViewModel by viewModels()
-        println()
         setContent {
             TraderNetTheme {
                 QuotesScreen()
