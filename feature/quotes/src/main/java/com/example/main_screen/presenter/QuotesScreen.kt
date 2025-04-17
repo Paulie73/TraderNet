@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -31,6 +32,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil3.compose.AsyncImage
 import com.example.common.AppColors
 
 @Composable
@@ -92,9 +94,17 @@ fun QuoteItem(quoteData: QuoteData) {
             .fillMaxWidth()
             .height(70.dp)
     ) {
+        AsyncImage(
+            model = quoteData.logoUrl,
+            contentDescription = null,
+            modifier = Modifier
+                .padding(start = 12.dp, top = 8.dp)
+                .size(24.dp)
+                .align(Alignment.TopStart),
+        )
         Text(
             modifier = Modifier
-                .padding(start = 16.dp, top = 8.dp)
+                .padding(start = 40.dp, top = 8.dp)
                 .align(Alignment.TopStart),
             text = quoteData.name,
             fontSize = 18.sp,

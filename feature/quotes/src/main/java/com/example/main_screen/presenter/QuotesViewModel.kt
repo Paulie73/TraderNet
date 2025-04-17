@@ -3,6 +3,7 @@ package com.example.main_screen.presenter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.main_screen.domain.QuotesUseCase
+import com.example.main_screen.domain.TopQuotesUseCase
 import com.example.network.Const.defaultIds
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class QuotesViewModel @Inject constructor(
-    private val quotesUseCase: QuotesUseCase
+    private val quotesUseCase: QuotesUseCase,
+    private val topQuotesUseCase: TopQuotesUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(QuotesUIState())
@@ -22,6 +24,8 @@ class QuotesViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
+//            topQuotesUseCase.getTopQuotes()
+
             quotesUseCase.subscribeToQuotes(defaultIds) { flow ->
                 flow.collect { quotes ->
                     _uiState.update {

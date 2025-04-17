@@ -2,6 +2,7 @@ package com.example.main_screen.mapers
 
 import com.example.main_screen.presenter.DeltaPercentageColoring
 import com.example.main_screen.presenter.QuoteData
+import com.example.network.Const.LOAD_LOGO_URL_PATH
 import com.example.network.models.Direction
 import com.example.network.models.QuoteResponse
 import com.example.network.models.Sign
@@ -9,7 +10,7 @@ import com.example.network.models.Sign
 @Synchronized
 fun QuoteResponse.toQuoteData(): QuoteData {
     return QuoteData(
-        logoUrl = "",
+        logoUrl = "$LOAD_LOGO_URL_PATH${c.lowercase()}",
         name = c,
         description = "$ltr | $name",
         price = "${bap?.format(minStep)} (${chg.plusSignIfNeeded()}${chg?.format(minStep)})",

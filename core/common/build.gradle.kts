@@ -43,4 +43,6 @@ dependencies {
     api(libs.hilt.android)
     kapt(libs.hilt.compiler)
     api(libs.androidx.lifecycle.viewmodel.compose)
+    api(libs.coil3.coil.compose)
+    api(libs.coil.network.okhttp)
 }

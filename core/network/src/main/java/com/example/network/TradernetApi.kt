@@ -1,11 +1,19 @@
 package com.example.network
 
 import android.util.Log
+import com.example.network.Const.CLIENT_API_BASE_URL
 import com.example.network.Const.TRADING_API_BASE_URL
 import com.example.network.models.QuoteResponse
+import com.example.network.models.TopQuotesRequest
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.plugins.websocket.wss
+import io.ktor.client.request.header
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
+import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
+import io.ktor.http.contentType
 import io.ktor.websocket.Frame
 import io.ktor.websocket.readText
 import kotlinx.coroutines.Dispatchers
@@ -23,11 +31,16 @@ class TradernetApi @Inject constructor(
     @KtorWebSocketClient private val ktorWebSocketClient: HttpClient
 ) {
 
-//    suspend fun getCountries() {
-//        return with(Dispatchers.IO) {
-//            ktorClient.get("$CLIENT_API_BASE_URL/country").body()
-//        }
-//    }
+    suspend fun getTopQuotes() {
+        return withContext(Dispatchers.IO) {
+            ktorClient.post("$CLIENT_API_BASE_URL/tradernet-api/quotes-get-top-securities") {
+                contentType(ContentType.Application.Json)
+                header(key = "X-NtApi-Sig", value = "42f278f660108d23bad6988e081b9f98f8facf0fdc8eccc7f9e7871ed395231a")
+                header(key = "apiKey", value = "980626bf27111a033c507d6c412b1f92")
+                setBody(TopQuotesRequest("getTopSecurities", TopQuotesRequest.Params("stocks", "russia", 0, 30, "980626bf27111a033c507d6c412b1f92")))
+            }.body()
+        }
+    }
 
     private var incoming: Flow<QuoteResponse> = MutableStateFlow(QuoteResponse("", "", ""))
     private var outgoing: SendChannel<Frame>? = null
@@ -43,7 +56,7 @@ class TradernetApi @Inject constructor(
                         runCatching {
                             val receivedText = (it as Frame.Text).readText()
                             val jsonString = receivedText.substringAfter(",").removeSuffix("]")
-                            Log.i("123123", receivedText)
+//                            Log.i("123123", receivedText)
                             jsonWithUnknownKeys.decodeFromString<QuoteResponse>(jsonString)
                         }.onSuccess {
                             return@mapNotNull it

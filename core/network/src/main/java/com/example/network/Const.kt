@@ -37,4 +37,5 @@ object Const {
         "MGGT.EU",
         "SGGD.EU"
     )
+    const val LOAD_LOGO_URL_PATH = "https://tradernet.com/logos/get-logo-by-ticker?ticker="
 }
