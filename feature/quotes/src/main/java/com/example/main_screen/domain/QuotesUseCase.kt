@@ -9,13 +9,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.sample
+import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 
 class QuotesUseCase @Inject constructor(
     private val tradernetApi: TradernetApi
 ) {
 
-    private val quoteResponseMap: MutableMap<String, QuoteResponse> = mutableMapOf()
+    private val quoteResponseMap: ConcurrentHashMap<String, QuoteResponse> = ConcurrentHashMap()
 
     suspend fun subscribeToQuotes(ids: List<String>, flow: suspend (Flow<List<QuoteData>>) -> Unit) {
         tradernetApi.initWebSocketSession {

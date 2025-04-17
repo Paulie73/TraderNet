@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -103,10 +104,12 @@ fun QuoteItem(quoteData: QuoteData) {
         Text(
             modifier = Modifier
                 .padding(start = 16.dp, bottom = 8.dp)
-                .align(Alignment.BottomStart),
+                .align(Alignment.BottomStart)
+                .width(200.dp),
             text = quoteData.description,
             fontSize = 11.sp,
-            color = AppColors.contentOnColorTertiary
+            color = AppColors.contentOnColorTertiary,
+            maxLines = 1
         )
 
         Text(

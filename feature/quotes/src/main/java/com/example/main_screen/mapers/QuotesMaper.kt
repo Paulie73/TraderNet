@@ -6,12 +6,13 @@ import com.example.network.models.Direction
 import com.example.network.models.QuoteResponse
 import com.example.network.models.Sign
 
+@Synchronized
 fun QuoteResponse.toQuoteData(): QuoteData {
     return QuoteData(
         logoUrl = "",
         name = c,
         description = "$ltr | $name",
-        price = "$bap (${chg.plusSignIfNeeded()}$chg)",
+        price = "${bap?.format(minStep)} (${chg.plusSignIfNeeded()}${chg?.format(minStep)})",
         deltaPercentage = "${pcp.plusSignIfNeeded()}$pcp%",
         deltaPercentageColoring = when {
             direction == Direction.UP -> DeltaPercentageColoring.GREEN_BACKGROUND
@@ -24,6 +25,7 @@ fun QuoteResponse.toQuoteData(): QuoteData {
     )
 }
 
+@Synchronized
 fun QuoteResponse.mergeWith(newQuoteResponse: QuoteResponse): QuoteResponse {
     return QuoteResponse(
         c = c,
@@ -32,6 +34,7 @@ fun QuoteResponse.mergeWith(newQuoteResponse: QuoteResponse): QuoteResponse {
         bap = newQuoteResponse.bap ?: bap,
         chg = newQuoteResponse.chg ?: chg,
         pcp = newQuoteResponse.pcp ?: pcp,
+        minStep = minStep,
         direction = when {
             newQuoteResponse.pcp != null && pcp != null && (newQuoteResponse.pcp!! > pcp!!) -> Direction.UP
             newQuoteResponse.pcp != null && pcp != null && (newQuoteResponse.pcp!! < pcp!!) -> Direction.DOWN
@@ -47,6 +50,26 @@ fun QuoteResponse.mergeWith(newQuoteResponse: QuoteResponse): QuoteResponse {
     )
 }
 
+@Synchronized
 fun Double?.plusSignIfNeeded(): String {
     return if (this != null && (this > 0.0)) "+" else ""
+}
+
+@Synchronized
+fun Double.format(minStep: Double?): String {
+    if (minStep == null) return "%.2f".format(this)
+
+    when (this) {
+        1.0 -> return "%.0f".format(this)
+        0.1 -> return "%.1f".format(this)
+        0.01 -> return "%.2f".format(this)
+        0.001 -> return "%.3f".format(this)
+        0.0001 -> return "%.4f".format(this)
+        0.00001 -> return "%.5f".format(this)
+        0.000001 -> return "%.6f".format(this)
+    }
+
+    val size = minStep.toString().substringAfter(".").length
+    return "%.${size}f".format(this)
+
 }
