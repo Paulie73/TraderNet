@@ -1,5 +1,6 @@
 package com.example.network
 
+import android.util.Log
 import com.example.network.Const.TRADING_API_BASE_URL
 import com.example.network.models.QuoteResponse
 import io.ktor.client.HttpClient
@@ -10,6 +11,7 @@ import io.ktor.websocket.readText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.withContext
@@ -27,7 +29,7 @@ class TradernetApi @Inject constructor(
 //        }
 //    }
 
-    private var incoming: Flow<QuoteResponse>? = null
+    private var incoming: Flow<QuoteResponse> = MutableStateFlow(QuoteResponse("", "", ""))
     private var outgoing: SendChannel<Frame>? = null
 
     suspend fun initWebSocketSession(onSuccess: suspend () -> Unit) {
@@ -41,6 +43,7 @@ class TradernetApi @Inject constructor(
                         runCatching {
                             val receivedText = (it as Frame.Text).readText()
                             val jsonString = receivedText.substringAfter(",").removeSuffix("]")
+                            Log.i("123123", receivedText)
                             jsonWithUnknownKeys.decodeFromString<QuoteResponse>(jsonString)
                         }.onSuccess {
                             return@mapNotNull it
@@ -56,7 +59,7 @@ class TradernetApi @Inject constructor(
         }
     }
 
-    suspend fun getRealtimeQuotes(ids: List<String>): Flow<Any>? {
+    suspend fun getRealtimeQuotes(ids: List<String>): Flow<QuoteResponse> {
         withContext(Dispatchers.IO) {
             val joinedString = ids.joinToString(separator = """","""")
             outgoing?.send(Frame.Text("""["realtimeQuotes", ["$joinedString"]]"""))

@@ -48,12 +48,12 @@ sealed interface ScreenState {
 }
 
 data class QuoteData(
-    val logoUrl: String,
-    val name: String,
-    val description: String,
-    val price: String,
-    val deltaPercentage: String,
-    val deltaPercentageColoring: DeltaPercentageColoring
+    val logoUrl: String = "",
+    val name: String = "",
+    val description: String = "",
+    val price: String = "",
+    val deltaPercentage: String = "",
+    val deltaPercentageColoring: DeltaPercentageColoring = DeltaPercentageColoring.GREEN
 )
 
 enum class DeltaPercentageColoring {

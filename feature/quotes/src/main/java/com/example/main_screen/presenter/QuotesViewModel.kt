@@ -1,14 +1,14 @@
 package com.example.main_screen.presenter
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.main_screen.domain.QuotesUseCase
-import com.example.network.TradernetApi
+import com.example.network.Const.defaultIds
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,7 +22,18 @@ class QuotesViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            quotesUseCase.subscribeToQuotes(listOf("AFLT", "AAPL.US"))
+            quotesUseCase.subscribeToQuotes(defaultIds) { flow ->
+                flow.collect { quotes ->
+                    _uiState.update {
+                        it.copy(
+                            isLoading = false,
+                            screenState = ScreenState.PayLoad(
+                                quotes = quotes
+                            )
+                        )
+                    }
+                }
+            }
         }
     }
 }

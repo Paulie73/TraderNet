@@ -89,7 +89,7 @@ fun QuoteItem(quoteData: QuoteData) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(60.dp)
+            .height(70.dp)
     ) {
         Text(
             modifier = Modifier
@@ -105,7 +105,7 @@ fun QuoteItem(quoteData: QuoteData) {
                 .padding(start = 16.dp, bottom = 8.dp)
                 .align(Alignment.BottomStart),
             text = quoteData.description,
-            fontSize = 10.sp,
+            fontSize = 11.sp,
             color = AppColors.contentOnColorTertiary
         )
 
@@ -127,7 +127,7 @@ fun QuoteItem(quoteData: QuoteData) {
                         DeltaPercentageColoring.GREEN_BACKGROUND -> AppColors.green
                         DeltaPercentageColoring.RED_BACKGROUND -> AppColors.red
                         DeltaPercentageColoring.RED, DeltaPercentageColoring.GREEN -> Color.Unspecified
-                    }, shape = RoundedCornerShape(6.dp)
+                    }, shape = RoundedCornerShape(8.dp)
                 )
                 .padding(2.dp),
             text = quoteData.deltaPercentage,
@@ -142,7 +142,7 @@ fun QuoteItem(quoteData: QuoteData) {
         Icon(
             Icons.Rounded.KeyboardArrowRight, "",
             modifier = Modifier.align(Alignment.CenterEnd),
-            tint = AppColors.divider
+            tint = AppColors.chevron
         )
 
         Box(

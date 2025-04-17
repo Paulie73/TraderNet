@@ -7,6 +7,7 @@ object AppColors {
     val contentOnColorSecondary = Color(0xb3151726)
     val contentOnColorTertiary = Color(0x80151726)
     val divider = Color(0xFFededef)
+    val chevron = Color(0xFFD1D1D1)
     val green = Color(0xFF72bf48)
     val red = Color(0xFFfb2d53)
 }
