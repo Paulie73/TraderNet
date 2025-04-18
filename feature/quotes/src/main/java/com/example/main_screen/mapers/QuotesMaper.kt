@@ -13,7 +13,7 @@ fun QuoteResponse.toQuoteData(): QuoteData {
         logoUrl = "$LOAD_LOGO_URL_PATH${c.lowercase()}",
         name = c,
         description = "$ltr | $name",
-        price = "${bap?.format(minStep)} (${chg.plusSignIfNeeded()}${chg?.format(minStep)})",
+        price = "${bap?.format(minStep)} ( ${chg.plusSignIfNeeded()}${chg?.format(minStep)} )",
         deltaPercentage = "${pcp.plusSignIfNeeded()}$pcp%",
         deltaPercentageColoring = when {
             direction == Direction.UP -> DeltaPercentageColoring.GREEN_BACKGROUND
