@@ -1,7 +1,5 @@
 
 
-https://github.com/user-attachments/assets/ff5a04f2-592b-4c24-9a2e-3f71594754f6
-
 Архитектура приложения построена на принципах Clean Architecture
 
 Проект разделен на модули с возможностью масштабирования:
@@ -33,3 +31,5 @@ https://github.com/user-attachments/assets/ff5a04f2-592b-4c24-9a2e-3f71594754f6
 	Network -> Ktor + Kotlin Serializer
 	Compose Images -> Coil
 	Presener architecture -> MVVM + Flow
+
+https://github.com/user-attachments/assets/ff5a04f2-592b-4c24-9a2e-3f71594754f6
