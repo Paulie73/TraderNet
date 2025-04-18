@@ -10,7 +10,7 @@ https://github.com/user-attachments/assets/ff5a04f2-592b-4c24-9a2e-3f71594754f6
 
 :core - модуль с базовыми модулями такими как:
     
-    :common - общий модуль, который встраивается ко всем модулям, которым нужны какие то общие зависимости
+	:common - общий модуль, который встраивается ко всем модулям, которым нужны какие то общие зависимости
 	:network - сетевой модуль. В нем содержится низкоуровневый сетевой слой
 
 :data - слой данных для фич. Состоит из data модулей для фич с data репозиториями
@@ -25,3 +25,11 @@ https://github.com/user-attachments/assets/ff5a04f2-592b-4c24-9a2e-3f71594754f6
 1. Добавляем фиче-модуль :feature:new-feature
 2. Добавляем data модуль для фичи :data:new-feature. Подключаем сюда по необходимости core модули
 3. Устанавливаем зависимости аналогично зависимостям выше
+
+Используемый стэк:
+
+	UI -> Cpmpose
+	DI -> Dagger Hilt
+	Network -> Ktor + Kotlin Serializer
+	Compose Images -> Coil
+	Presener architecture -> MVVM + Flow
