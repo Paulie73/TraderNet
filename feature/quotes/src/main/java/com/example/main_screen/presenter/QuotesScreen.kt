@@ -26,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.LayoutDirection
@@ -108,6 +109,7 @@ fun QuoteItem(quoteData: QuoteData) {
                 .align(Alignment.TopStart),
             text = quoteData.name,
             fontSize = 18.sp,
+            fontWeight = FontWeight.Medium,
             color = AppColors.contentOnColorPrimary
         )
 
@@ -118,6 +120,7 @@ fun QuoteItem(quoteData: QuoteData) {
                 .width(200.dp),
             text = quoteData.description,
             fontSize = 11.sp,
+            fontWeight = FontWeight.Medium,
             color = AppColors.contentOnColorTertiary,
             maxLines = 1
         )
@@ -128,6 +131,7 @@ fun QuoteItem(quoteData: QuoteData) {
                 .align(Alignment.BottomEnd),
             text = quoteData.price,
             fontSize = 13.sp,
+            fontWeight = FontWeight.Medium,
             color = AppColors.contentOnColorPrimary
         )
 
@@ -145,6 +149,7 @@ fun QuoteItem(quoteData: QuoteData) {
                 .padding(2.dp),
             text = quoteData.deltaPercentage,
             fontSize = 18.sp,
+            fontWeight = FontWeight.Medium,
             color = when (quoteData.deltaPercentageColoring) {
                 DeltaPercentageColoring.GREEN_BACKGROUND, DeltaPercentageColoring.RED_BACKGROUND -> Color.White
                 DeltaPercentageColoring.RED -> AppColors.red
