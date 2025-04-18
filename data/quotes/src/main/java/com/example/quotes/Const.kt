@@ -1,4 +1,4 @@
-package com.example.network
+package com.example.quotes
 
 object Const {
     const val CLIENT_API_BASE_URL = "https://tradernet.com"

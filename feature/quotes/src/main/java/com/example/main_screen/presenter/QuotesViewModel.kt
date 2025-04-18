@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.main_screen.domain.QuotesUseCase
 import com.example.main_screen.domain.TopQuotesUseCase
-import com.example.network.Const.defaultIds
+import com.example.quotes.Const.defaultIds
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -38,6 +38,20 @@ class QuotesViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    fun reverseArray(intArray: IntArray) {
+        var leftIndex = 0
+        var rightIndex = intArray.size - 1
+
+        while (leftIndex < rightIndex) {
+            val tempValue = intArray[leftIndex]
+            intArray[leftIndex] = intArray[rightIndex]
+            intArray[rightIndex] = tempValue
+
+            leftIndex++
+            rightIndex--
         }
     }
 }

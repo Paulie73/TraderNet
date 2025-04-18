@@ -1,4 +1,4 @@
-package com.example.tradernet.di
+package com.example.network.di
 
 import com.example.network.KtorHttpClient
 import com.example.network.KtorWebSocketClient

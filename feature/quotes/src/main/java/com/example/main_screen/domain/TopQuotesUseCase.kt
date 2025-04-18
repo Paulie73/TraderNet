@@ -1,13 +1,13 @@
 package com.example.main_screen.domain
 
-import com.example.network.TradernetApi
+import com.example.quotes.QuotesRepository
 import javax.inject.Inject
 
 class TopQuotesUseCase @Inject constructor(
-    private val tradernetApi: TradernetApi
+    private val quotesRepository: QuotesRepository
 ) {
 
     suspend fun getTopQuotes() {
-        tradernetApi.getTopQuotes()
+        quotesRepository.getTopQuotes()
     }
 }

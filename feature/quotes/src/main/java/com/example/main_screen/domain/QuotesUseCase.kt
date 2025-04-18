@@ -3,8 +3,8 @@ package com.example.main_screen.domain
 import com.example.main_screen.mapers.mergeWith
 import com.example.main_screen.mapers.toQuoteData
 import com.example.main_screen.presenter.QuoteData
-import com.example.network.TradernetApi
-import com.example.network.models.QuoteResponse
+import com.example.quotes.QuotesRepository
+import com.example.quotes.models.QuoteResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -13,14 +13,14 @@ import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 
 class QuotesUseCase @Inject constructor(
-    private val tradernetApi: TradernetApi
+    private val quotesRepository: QuotesRepository
 ) {
 
     private val quoteResponseMap: ConcurrentHashMap<String, QuoteResponse> = ConcurrentHashMap()
 
     suspend fun subscribeToQuotes(ids: List<String>, flow: suspend (Flow<List<QuoteData>>) -> Unit) {
-        tradernetApi.initWebSocketSession {
-            val listFlow = tradernetApi.getRealtimeQuotes(ids)
+        quotesRepository.initWebSocketSession {
+            val listFlow = quotesRepository.getRealtimeQuotes(ids)
                 .onEach { newQuoteResponse ->
                     quoteResponseMap[newQuoteResponse.c]?.let { oldQuoteResponse ->
                         quoteResponseMap[newQuoteResponse.c] = oldQuoteResponse.mergeWith(newQuoteResponse)

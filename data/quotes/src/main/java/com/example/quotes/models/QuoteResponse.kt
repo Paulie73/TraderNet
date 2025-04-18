@@ -1,4 +1,4 @@
-package com.example.network.models
+package com.example.quotes.models
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
