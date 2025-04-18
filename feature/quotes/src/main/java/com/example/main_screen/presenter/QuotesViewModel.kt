@@ -40,18 +40,4 @@ class QuotesViewModel @Inject constructor(
             }
         }
     }
-
-    fun reverseArray(intArray: IntArray) {
-        var leftIndex = 0
-        var rightIndex = intArray.size - 1
-
-        while (leftIndex < rightIndex) {
-            val tempValue = intArray[leftIndex]
-            intArray[leftIndex] = intArray[rightIndex]
-            intArray[rightIndex] = tempValue
-
-            leftIndex++
-            rightIndex--
-        }
-    }
 }
