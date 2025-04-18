@@ -1,7 +1,7 @@
 package com.example.quotes
 
 object Const {
-    const val CLIENT_API_BASE_URL = "https://tradernet.com"
+    const val CLIENT_API_BASE_URL = "https://tradernet.com/api"
     const val TRADING_API_BASE_URL = "wss.tradernet.com"
     val defaultIds = listOf(
         "SP500.IDX",

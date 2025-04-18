@@ -24,9 +24,9 @@ class QuotesViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-//            topQuotesUseCase.getTopQuotes()
+            val ids = topQuotesUseCase.getTopQuotes()
 
-            quotesUseCase.subscribeToQuotes(defaultIds) { flow ->
+            quotesUseCase.subscribeToQuotes(ids) { flow ->
                 flow.collect { quotes ->
                     _uiState.update {
                         it.copy(

@@ -1,11 +1,12 @@
 package com.example.quotes
 
 import com.example.quotes.models.QuoteResponse
+import com.example.quotes.models.TopQuotesResponse
 import kotlinx.coroutines.flow.Flow
 
 interface QuotesRepository {
 
-    suspend fun getTopQuotes()
+    suspend fun getTopQuotes(): TopQuotesResponse
 
     suspend fun initWebSocketSession(onSuccess: suspend () -> Unit)
 

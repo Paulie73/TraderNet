@@ -4,10 +4,10 @@ import com.example.network.KtorHttpClient
 import com.example.network.KtorWebSocketClient
 import com.example.quotes.models.QuoteResponse
 import com.example.quotes.models.TopQuotesRequest
+import com.example.quotes.models.TopQuotesResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.websocket.wss
-import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
@@ -30,13 +30,11 @@ class QuotesRepositoryImpl @Inject constructor(
     @KtorWebSocketClient private val ktorWebSocketClient: HttpClient
 ) : QuotesRepository {
 
-    override suspend fun getTopQuotes() {
+    override suspend fun getTopQuotes(): TopQuotesResponse {
         return withContext(Dispatchers.IO) {
-            ktorClient.post("${Const.CLIENT_API_BASE_URL}/tradernet-api/quotes-get-top-securities") {
+            ktorClient.post(Const.CLIENT_API_BASE_URL) {
                 contentType(ContentType.Application.Json)
-                header(key = "X-NtApi-Sig", value = "42f278f660108d23bad6988e081b9f98f8facf0fdc8eccc7f9e7871ed395231a")
-                header(key = "apiKey", value = "980626bf27111a033c507d6c412b1f92")
-                setBody(TopQuotesRequest("getTopSecurities", TopQuotesRequest.Params("stocks", "russia", 0, 30, "980626bf27111a033c507d6c412b1f92")))
+                setBody(TopQuotesRequest(q = TopQuotesRequest.Q("getTopSecurities", TopQuotesRequest.Params("stocks", "russia", 0, 30))))
             }.body()
         }
     }

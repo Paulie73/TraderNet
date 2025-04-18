@@ -7,7 +7,7 @@ class TopQuotesUseCase @Inject constructor(
     private val quotesRepository: QuotesRepository
 ) {
 
-    suspend fun getTopQuotes() {
-        quotesRepository.getTopQuotes()
+    suspend fun getTopQuotes(): List<String> {
+       return quotesRepository.getTopQuotes().tickers
     }
 }
